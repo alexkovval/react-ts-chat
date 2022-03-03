@@ -1,37 +1,29 @@
-.window{
-    background-color:bisque;
-    height:80vh;
-    width:80vh;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    flex-direction: column;
+.mainContainer {
+  background-color: bisque;
+  width: 1200px;
+  min-height: 600px;
+  flex-direction: column;
+  padding: 20px;
 }
-h3{
-    position: relative;
-    width:55px;
-    left: 70px;
+h3 {
+  width: 55px;
 }
-.rooms{
-    display: block;
-    position: absolute;
-    left:50px;
-    height: 80%;
-    padding-bottom: 20px;
+
+.room {
+  padding-bottom: 10px;
+  width: 150px;
+  float: left;
 }
-.room{
-    padding-bottom: 10px;
+button {
+  display: block;
+  margin-bottom: 10px;
 }
-button{
-    display: block;
-    margin-bottom: 10px;
+.messages,
+.createMessage {
+  position: absolute;
+  left: 200px;
+  margin-bottom: 10px;
 }
-.messages, .createMessage{
-    position: absolute;
-    left:200px;
-    margin-bottom: 10px;
-}
-.messages{
-    top:120px;
+.messages {
+  top: 120px;
 }
