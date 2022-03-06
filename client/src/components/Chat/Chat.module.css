@@ -1,0 +1,35 @@
+h3 {
+  width: 55px;
+}
+
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+.chat {
+  width: 400px;
+  float: left;
+}
+.createMessage {
+  width: auto;
+  margin-top: 10px;
+}
+
+.createmessage input[type="button"] {
+  margin-top: 10px;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
+}
+.messages {
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 400px;
+  padding: 20px;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  color: black;
+}
+.oneMessage {
+}

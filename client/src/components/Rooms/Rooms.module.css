@@ -1,0 +1,29 @@
+.mainContainer {
+  background-color: bisque;
+  width: 1200px;
+  min-height: 600px;
+  flex-direction: column;
+  padding: 20px;
+}
+h3 {
+  width: 55px;
+}
+
+.room {
+  padding-bottom: 10px;
+  width: 150px;
+  float: left;
+}
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+.messages,
+.createMessage {
+  position: absolute;
+  left: 200px;
+  margin-bottom: 10px;
+}
+.messages {
+  top: 120px;
+}
