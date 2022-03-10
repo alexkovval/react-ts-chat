@@ -4,13 +4,13 @@ import socket from "../../socket/socket";
 import { IUser } from "../../models/User";
 import { IMessage } from "../../models/Message";
 
-interface ChatProps {
+interface IChatProps {
   user: IUser;
   roomId: string;
   messageList: IMessage[];
   setMessageList: Function;
 }
-export const Chat: FC<ChatProps> = ({
+export const Chat: FC<IChatProps> = ({
   user,
   roomId,
   messageList,
