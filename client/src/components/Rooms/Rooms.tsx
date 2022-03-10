@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../hooks/hooks";
 import socket from "../../socket/socket";
+
 import { Chat } from "../Chat/Chat";
 import styles from "./Rooms.module.css";
 import { IRoom } from "../../models/Room";
+import { IMessage } from "../../models/Message";
 
 export const Rooms = () => {
-  const [messageList, setMessageList] = useState([]);
-  const [connected, setConnected] = useState(false);
+  const [messageList, setMessageList] = useState<IMessage[]>([]);
   const [rooms, setRooms] = useState<IRoom[]>([]);
-  const [roomId, setRoomId] = useState("");
+  const [roomId, setRoomId] = useState<string>("");
 
   //GET USER FROM LOGIN
-
-  const token = useAppSelector((state) => state.user.token);
-
   const user = JSON.parse(localStorage.getItem("user") || "");
   let tokenStorage = localStorage.getItem("jwt");
 
   useEffect(() => {
     fetch("http://localhost:5000/rooms", {
       headers: {
-        "x-access-token": token ? token : tokenStorage || "",
+        "x-access-token": tokenStorage || "",
       },
     })
       .then((response) => response.json())
@@ -30,20 +27,24 @@ export const Rooms = () => {
 
   const openRoom = (roomId: string) => {
     socket.connect();
+    const oldRoomId = localStorage.getItem("roomId");
+    socket.emit("leave_room", oldRoomId);
+    setMessageList([]);
     setRoomId(roomId);
     socket.emit("join_room", roomId);
-    setConnected(true);
+    localStorage.setItem("roomId", roomId);
     fetch("http://localhost:5000/messages/room", {
       method: "POST",
       headers: {
-        "x-access-token": token ? token : tokenStorage || "",
+        "x-access-token": tokenStorage || "",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         roomId: roomId,
       }),
-    }).then((response) => response.json());
-    // .then((data) => setMessageList(data));
+    })
+      .then((response) => response.json())
+      .then((data) => setMessageList(data));
   };
 
   const handleOpenRoom = (room: any) => {
@@ -70,7 +71,7 @@ export const Rooms = () => {
           </div>
         </div>
       </div>
-      {connected && (
+      {messageList && (
         <>
           <h3>{roomId}</h3>
           <Chat

@@ -50,6 +50,14 @@ io.on("connection", (socket) => {
     console.log("User joined the room: " + roomId + " SocketId: " + socket.id);
     socket.join(roomId);
   });
+<<<<<<< HEAD
+=======
+  
+  socket.on("leave_room", (roomId) => {
+    console.log("User joined the room: " + roomId + " SocketId: " + socket.id);
+    socket.leave(roomId);
+  });
+>>>>>>> 650be61... second commit
 
   socket.on("newMessage", (newMessage) => {
     console.log(
