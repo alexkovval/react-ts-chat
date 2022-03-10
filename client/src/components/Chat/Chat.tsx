@@ -23,9 +23,9 @@ export const Chat: FC<ChatProps> = ({
       setMessageList((list: any) => [...list, message]);
     });
     return () => socket.disconnect();
-  }, [setMessageList]);
+  }, [socket]);
 
-  const handleMessageButton = async (e: any) => {
+  const handleMessageButton = async (e: React.MouseEvent) => {
     e.preventDefault();
     const newMessage: IMessage = {
       //???? it's ok?

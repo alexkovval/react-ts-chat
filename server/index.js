@@ -51,6 +51,11 @@ io.on("connection", (socket) => {
     socket.join(roomId);
   });
 
+  socket.on("leave_room", (roomId) => {
+    console.log("User joined the room: " + roomId + " SocketId: " + socket.id);
+    socket.leave(roomId);
+  });
+
   socket.on("newMessage", (newMessage) => {
     console.log(
       "Message: " +

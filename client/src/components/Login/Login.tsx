@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./Login.module.css";
-
-import { useDispatch } from "react-redux";
-import { changeIsLogged } from "../../redux/Auth";
-import { token } from "../../redux/Auth";
 import socket from "../../socket/socket";
+
+import styles from "./Login.module.css";
 
 export const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   let navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(changeIsLogged(true));
     //POST => get token
     fetch("http://localhost:5000/users/login", {
+      //TODO : .env (links)
       headers: {
         "Content-Type": "application/json",
       },
@@ -27,9 +22,9 @@ export const Login = () => {
     })
       .then((response) => response.json())
       .then((user) => {
-        dispatch(token(user.candidate.token));
         localStorage.setItem("jwt", user.candidate.token);
         localStorage.setItem("user", JSON.stringify(user.candidate));
+        //TODO : localstorage,sessionstorage ? coockie=jwt
         socket.connect();
         socket.emit("enter", user);
         navigate("/chat");
